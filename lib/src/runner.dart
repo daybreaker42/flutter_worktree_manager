@@ -7,25 +7,25 @@ class WorktreeRunner {
 
   WorktreeRunner(this.config);
 
-  /// 새로운 워크트리를 생성하고 환경을 설정합니다.
+  /// Creates a new worktree and sets up the environment.
   Future<void> create(String branchName) async {
     final safeFolderName = branchName.replaceAll('/', '_');
     final targetPath = p.join(config.baseDir, safeFolderName);
 
-    print('🚀 Worktree 생성 시작: $branchName');
+    print('🚀 Starting worktree creation: $branchName');
 
     try {
       // 1. Git Worktree 추가
       if (await Directory(targetPath).exists()) {
-        print('⚠️  이미 폴더가 존재합니다: $targetPath');
+        print('⚠️  Folder already exists: $targetPath');
       } else {
-        print('📂 [1/4] Git 워크트리 생성 중...');
+        print('📂 [1/4] Creating git worktree...');
         await _runCommand(
             'git', ['worktree', 'add', '-b', branchName, targetPath]);
       }
 
       // 2. 설정 파일 복사 (시크릿 파일 등)
-      print('📄 [2/4] 설정 파일 복사 중...');
+      print('📄 [2/4] Copying configuration files...');
       for (var filePath in config.configFiles) {
         final sourceFile = File(filePath);
         final destFile = File(p.join(targetPath, filePath));
@@ -33,19 +33,19 @@ class WorktreeRunner {
         if (await sourceFile.exists()) {
           await Directory(destFile.parent.path).create(recursive: true);
           await sourceFile.copy(destFile.path);
-          print('   ✅ 복사 완료: $filePath');
+          print('   ✅ Copy completed: $filePath');
         } else {
-          print('   ❓ 원본 없음 (건너뜀): $filePath');
+          print('   ❓ Source not found (skipping): $filePath');
         }
       }
 
       // 3. Flutter 패키지 설치
-      print('📦 [3/4] Flutter 패키지 설치 중...');
+      print('📦 [3/4] Installing Flutter packages...');
       await _runCommand('flutter', ['pub', 'get'],
           workingDirectory: targetPath);
 
       // 4. Build Runner 실행
-      print('🔧 [4/4] 빌드 러너 실행 중...');
+      print('🔧 [4/4] Running build_runner...');
       await _runCommand(
           'dart',
           [
@@ -56,34 +56,34 @@ class WorktreeRunner {
           ],
           workingDirectory: targetPath);
 
-      print('\n✨ 모든 설정이 완료되었습니다!');
-      print('📍 작업 경로: ${Directory(targetPath).absolute.path}');
+      print('\n✨ All setup completed!');
+      print('📍 Work path: ${Directory(targetPath).absolute.path}');
     } catch (e) {
-      print('\n❌ 생성 중 오류 발생: $e');
+      print('\n❌ Error occurred during creation: $e');
     }
   }
 
-  /// 워크트리를 삭제하고 연결을 해제합니다.
+  /// Removes the worktree and disconnects it.
   Future<void> remove(String branchName) async {
     final safeFolderName = branchName.replaceAll('/', '_');
     final targetPath = p.join(config.baseDir, safeFolderName);
 
-    print('🧹 워크트리 삭제 시작: $branchName');
+    print('🧹 Starting worktree removal: $branchName');
 
     try {
-      print('🗑️ [1/2] Git 워크트리 연결 해제 중...');
+      print('🗑️ [1/2] Removing git worktree...');
       await _runCommand('git', ['worktree', 'remove', targetPath]);
       await _runCommand('git', ['worktree', 'prune']);
 
       final dir = Directory(targetPath);
       if (await dir.exists()) {
-        print('📂 [2/2] 잔여 폴더 삭제 중...');
+        print('📂 [2/2] Deleting remaining folder...');
         await dir.delete(recursive: true);
       }
-      print('\n✅ 워크트리가 성공적으로 제거되었습니다.');
+      print('\n✅ Worktree removed successfully.');
     } catch (e) {
-      print('\n❌ 삭제 중 오류 발생: $e');
-      print('💡 수동 삭제: git worktree remove $targetPath --force');
+      print('\n❌ Error occurred during removal: $e');
+      print('💡 Manual removal: git worktree remove $targetPath --force');
     }
   }
 

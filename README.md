@@ -34,7 +34,7 @@ copy_files:
 To create a new worktree, run:
 
 ```bash
-ftree create <branch-name>
+ftree <branch-name>
 ```
 
 When you want to remove a worktree, use:
@@ -43,14 +43,34 @@ When you want to remove a worktree, use:
 ftree --remove <branch-name>
 ```
 
+To see help message, run:
+
+```bash
+ftree --help
+```
+
 
 ## Installation
 
-Add it to your `dev_dependencies`:
+You can install `ftree` globally using the following command:
+
+```bash
+dart pub global activate flutter_worktree_manager
+```
+
+Make sure your `PATH` is set up to include the Dart SDK's bin directory to run `ftree` from anywhere.
+
+Alternatively, you can add it to your `dev_dependencies`:
 
 ```yaml
 dev_dependencies:
   flutter_worktree_manager: ^0.1.0
+```
+
+Then run it using:
+```bash
+dart run flutter_worktree_manager <branch-name>
+```
 
 
 ## Credits
