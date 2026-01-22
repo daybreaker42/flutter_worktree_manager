@@ -1,2 +1,6 @@
 worktree_config.yaml
 .DS_Store
+doc/
+.dart_tool/
+.packages
+pubspec.lock
