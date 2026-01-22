@@ -51,3 +51,10 @@ Add it to your `dev_dependencies`:
 ```yaml
 dev_dependencies:
   flutter_worktree_manager: ^0.1.0
+
+
+## Credits
+
+This package depends on the following excellent libraries:
+- [path](https://pub.dev/packages/path) - BSD-3-Clause
+- [yaml](https://pub.dev/packages/yaml) - MIT-Clause
