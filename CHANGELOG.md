@@ -1,4 +1,4 @@
-## 1.0.0
+## 0.1.0
 
 * Initial release.
 * Support for creating git worktrees with automatic config file copying.

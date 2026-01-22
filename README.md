@@ -50,4 +50,4 @@ Add it to your `dev_dependencies`:
 
 ```yaml
 dev_dependencies:
-  flutter_worktree_manager: ^1.0.0
+  flutter_worktree_manager: ^0.1.0

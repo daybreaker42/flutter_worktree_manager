@@ -5,7 +5,7 @@
   "packages": [
     {
       "name": "flutter_worktree_manager",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "dependencies": [
         "path",
         "yaml"
