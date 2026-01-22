@@ -2,12 +2,20 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'config_loader.dart';
 
+/// The main runner for worktree operations.
 class WorktreeRunner {
+  /// The configuration for the worktree manager.
   final WorktreeConfig config;
 
   WorktreeRunner(this.config);
 
   /// Creates a new worktree and sets up the environment.
+  ///
+  /// This includes:
+  /// 1. Creating the git worktree.
+  /// 2. Copying configuration files.
+  /// 3. Running `flutter pub get`.
+  /// 4. Running `build_runner build` if applicable.
   Future<void> create(String branchName) async {
     final safeFolderName = branchName.replaceAll('/', '_');
     final targetPath = p.join(config.baseDir, safeFolderName);
