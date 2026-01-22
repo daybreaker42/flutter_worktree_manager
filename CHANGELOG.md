@@ -1,3 +1,11 @@
+## 0.1.1
+
+* Localized all CLI output messages and help information to English.
+* Added support for `--help` and `-h` flags.
+* Improved documentation with comprehensive Doc comments.
+* Exported public library for better API documentation on pub.dev.
+* Updated `.gitignore` to keep the project clean.
+
 ## 0.1.0
 
 * Initial release.
