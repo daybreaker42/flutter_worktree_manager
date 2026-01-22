@@ -68,6 +68,13 @@ dev_dependencies:
 ```
 
 Then run it using:
+
+```bash
+ftree <branch-name>
+```
+
+Or via `dart run`:
+
 ```bash
 dart run flutter_worktree_manager <branch-name>
 ```
