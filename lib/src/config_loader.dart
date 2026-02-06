@@ -18,7 +18,6 @@ class WorktreeConfig {
     final configFile = File('worktree_config.yaml');
 
     if (!await configFile.exists()) {
-      print('ℹ️  worktree_config.yaml not found, using default settings.');
       return WorktreeConfig(
         baseDir: '../worktrees',
         configFiles: ['.env'],
@@ -32,5 +31,26 @@ class WorktreeConfig {
       baseDir: doc['base_dir'] ?? '../worktrees',
       configFiles: List<String>.from(doc['copy_files'] ?? []),
     );
+  }
+
+  /// Checks if the 'worktree_config.yaml' file exists.
+  static Future<bool> exists() async {
+    return await File('worktree_config.yaml').exists();
+  }
+
+  /// Creates a default 'worktree_config.yaml' file.
+  static Future<void> createDefault() async {
+    final configFile = File('worktree_config.yaml');
+    const defaultConfig = '''
+# Base directory where worktrees will be created.
+base_dir: ../worktrees
+
+# List of files to be copied from the current project to each new worktree.
+# Examples: .env, keys.jks, local.properties
+copy_files:
+  - .env
+''';
+    await configFile.writeAsString(defaultConfig);
+    print('✅ worktree_config.yaml has been created with default settings.');
   }
 }
