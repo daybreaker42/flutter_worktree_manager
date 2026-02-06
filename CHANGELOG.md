@@ -1,3 +1,6 @@
+## 0.1.3
+* Added some basic config files into default worktree config yaml.
+
 ## 0.1.2
 
 * Added `init` command to automatically generate a default `worktree_config.yaml`.

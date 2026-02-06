@@ -1,6 +1,6 @@
 name: flutter_worktree_manager
 description: A CLI tool to manage Flutter git worktrees with automatic secret file copying and build_runner support.
-version: 0.1.2
+version: 0.1.3
 repository: https://github.com/daybreaker42/flutter_worktree_manager
 
 environment:
