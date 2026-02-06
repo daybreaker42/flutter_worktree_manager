@@ -1,3 +1,8 @@
+## 0.1.2
+
+* Added `init` command to automatically generate a default `worktree_config.yaml`.
+* Added a notification and suggestion message when the configuration file is missing.
+
 ## 0.1.1
 
 * Localized all CLI output messages and help information to English.
