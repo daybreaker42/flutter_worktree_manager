@@ -49,6 +49,12 @@ base_dir: ../worktrees
 # Examples: .env, keys.jks, local.properties
 copy_files:
   - .env
+  - android/local.properties
+  - android/key.properties
+  - android/app/google-services.json
+  - ios/GoogleService-Info.plist
+  - ios/Runner/GoogleService-Info.plist
+  - lib/firebase_options.dart
 ''';
     await configFile.writeAsString(defaultConfig);
     print('✅ worktree_config.yaml has been created with default settings.');
